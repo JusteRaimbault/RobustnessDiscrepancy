@@ -1,0 +1,10 @@
+
+----
+arrondissements : communes from
+http://osm13.openstreetmap.fr/~cquest/openfla/export/communes-20150101-100m-shp.zip
+
+----
+osm Paris : Mapzen
+https://s3.amazonaws.com/metro-extracts.mapzen.com/paris_france.osm2pgsql-shapefiles.zip
+
+
