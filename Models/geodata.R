@@ -88,13 +88,13 @@ plot(buildings@coords[!is.na(arr),])
 roads_data=c()
 
 for(i in 1:length(roads@lines)){
-  coords = roads@lines[[4]]@Lines[[1]]@coords
+  coords = roads@lines[[i]]@Lines[[1]]@coords
   for(j in 2:length(coords[,1])){
     roads_data=append(roads_data,c(coords[j,1],coords[j,2],sqrt((coords[j,1]-coords[j-1,1])^2+(coords[j,2]-coords[j-1,2])^2)))
   }
 }
 
 # construct corresponding matrix
-roads_raw = matrix(data=roads_data,nrow=length(roads@lines),byrow=TRUE)
+roads_raw = matrix(data=roads_data,nrow=length(roads_data)/3,byrow=TRUE)
 
 
