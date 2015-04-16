@@ -27,6 +27,8 @@ dmax = sqrt((2.428637-2.241859)^2+(48.9171-48.79654)^2)
 
 carToWork <- function(arrs){
   coords = buildings@coords[arr_buildings%in% arrs,]
+  # sample for perf reasons
+  coords = coords[sample(1:length(coords[,1]),floor(length(coords[,1])*0.05)),]
   n=length(coords[,1])
   inds=sample(1:n,size=floor(0.1*n))
   with_car = coords[inds,]
@@ -53,6 +55,7 @@ carToWork <- function(arrs){
 
 vehicleFlow <- function(arrs){
   coords = roads_raw[arr_streets%in% arrs,]
+  coords = coords[sample(1:length(coords[,1]),floor(length(coords[,1])*0.05)),]
   # generate hierarchy
   flows <- rlnorm(length(coords[,1]),0,0.01)/2
   flows<- flows/max(flows)
@@ -77,7 +80,8 @@ vehicleFlow <- function(arrs){
 
 pedestrianStreets <- function(arrs){
   coords = roads_raw[arr_streets%in% arrs,]
-  dat = matrix(0,length(coords[,1]),4)
+  coords = coords[sample(1:length(coords[,1]),floor(length(coords[,1])*0.05)),]
+  dat = matrix(0,length(coords[,1]),3)
   dat[,1:3]=coords
   
   tot_length=sum(coords[,3])
@@ -86,7 +90,7 @@ pedestrianStreets <- function(arrs){
   indic = sum(dat[,3])/tot_length
   
   res=list()
-  res[[1]]=roads_raw
+  res[[1]]=dat
   res[[2]]=indic
   
   return(res)
@@ -104,22 +108,58 @@ rawBound <- function(indics,arrs){
   for(i in 1:length(indics)){
     r = indics[i][[1]](arrs)
     weights = append(weights,r[[2]])
+    #show(dim(r[[1]]))
     discrs = append(discrs,discrepancyCriteria(r[[1]],type=c('L2'))$DisL2)
   }
+  res=list()
+  
+  #mem values
+  res[[1]]=weights
+  
   weights=weights/sum(weights)
-  return(sum(weights*discrs))
+  #show(weights)
+  #show(discrs)
+  
+  res[[2]]=sum(weights*discrs)
+  
+  return(res)
 }
 
 # test
 all = c(carToWork,vehicleFlow,pedestrianStreets)
-rawBound(all,c(1))
+rawBound(all,c(10))
 
 
+# OK -> let compute for all arrs
+i1=list();i2=list();i3=list();bound=list();
+for(i in 1:20){
+  i1[[i]]=c(0);i2[[i]]=c(0);i3[[i]]=c(0);bound[[i]]=c(0)
+}
+
+nrep = 50
+
+for(n in 1:nrep){
+  show(n)
+for(i in 1:20){
+  
+  r=rawBound(all,c(i))
+  i1[[i]]=append(i1[[i]],r[[1]][1]);i2[[i]]=append(i2[[i]],r[[1]][2]);i3[[i]]=append(i3[[i]],r[[1]][3])
+  bound[[i]]=append(bound[[i]],r[[2]])
+}
+
+}
 
 
-
-
-
+# produce final mat
+res = matrix("",20,4)
+for(i in 1:20){
+  # compare to first arr
+  res[i,1] = paste(mean(i1[[i]]),"+-",sd(i1[[i]]))
+  res[i,2] = paste(mean(i2[[i]]),"+-",sd(i2[[i]]))
+  res[i,3] = paste(mean(i3[[i]]),"+-",sd(i3[[i]]))
+  res[i,4] = paste(mean(bound[[i]]),"+-",sd(bound[[i]]))
+  
+}
 
 
 
