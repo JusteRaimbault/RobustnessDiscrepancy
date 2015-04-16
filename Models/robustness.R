@@ -1,13 +1,17 @@
 
 #Generic Implementation for integrated robustness calculation
 
+## First Tests
 # -> one data file per indicator (simpler to import data)
 # -> value of the indicator (to caluclate weights)
+## Operational fwk
+# -> geo data for Paris, expression of indicators
+
 
 # ** We aggregate X and Y since this distinction has more a conceptual interest **
 
 
-#DiceDesign packages for discrepancy calculation ?
+#DiceDesign package for discrepancy calculation
 
 library(DiceDesign)
 

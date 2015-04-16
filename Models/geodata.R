@@ -23,6 +23,10 @@ plot(SpatialPolygons(com@polygons[parisIndexes]))
 
 arrondissements<- SpatialPolygons(com@polygons[parisIndexes])
 
+# needs to reorder by hand to have good numerotation
+arrondissements<-arrondissements[c(11,3,17,16,12,4,13,19,20,14,15,1,2,9,7,8,18,5,6,10)]
+#c(12,13,2,6,18,19,15,16,14,20,1,5,7,10,11,4,3,17,8,9)
+
 #writeOGR(SpatialPolygonsDataFrame(data=arrondissements),'Data/processed','arrondissements','ESRI Shapefile')
 
 ###################
@@ -74,5 +78,23 @@ plot(arr)
 arr<- over(SpatialPoints(buildings),arrondissements)
 
 plot(buildings@coords[!is.na(arr),])
+
+
+
+#############
+#############
+#extract single points from roads
+
+roads_data=c()
+
+for(i in 1:length(roads@lines)){
+  coords = roads@lines[[4]]@Lines[[1]]@coords
+  for(j in 2:length(coords[,1])){
+    roads_data=append(roads_data,c(coords[j,1],coords[j,2],sqrt((coords[j,1]-coords[j-1,1])^2+(coords[j,2]-coords[j-1,2])^2)))
+  }
+}
+
+# construct corresponding matrix
+roads_raw = matrix(data=roads_data,nrow=length(roads@lines),byrow=TRUE)
 
 
