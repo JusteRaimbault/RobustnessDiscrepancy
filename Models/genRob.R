@@ -151,16 +151,17 @@ for(i in 1:20){
 
 
 # produce final mat
-res = matrix("",20,4)
+res = matrix("",20,5)
 for(i in 1:20){
   # compare to first arr
-  res[i,1] = paste(mean(i1[[i]]),"+-",sd(i1[[i]]))
-  res[i,2] = paste(mean(i2[[i]]),"+-",sd(i2[[i]]))
-  res[i,3] = paste(mean(i3[[i]]),"+-",sd(i3[[i]]))
-  res[i,4] = paste(mean(bound[[i]]),"+-",sd(bound[[i]]))
+  res[i,1] = paste(i,"th")
+  res[i,2] = paste(sprintf("%07.6f", mean(i1[[i]][2:51])),"$\\pm$",sprintf("%07.6f",sd(i1[[i]][2:51])))
+  res[i,3] = paste(sprintf("%07.6f",mean(i2[[i]][2:51])),"$\\pm$",sprintf("%07.6f",sd(i2[[i]][2:51])))
+  res[i,4] = paste(sprintf("%07.6f",mean(i3[[i]][2:51])),"$\\pm$",sprintf("%07.6f",sd(i3[[i]][2:51])))
+  res[i,5] = paste(sprintf("%07.6f",mean(bound[[i]][2:51]/bound[[1]][2:51])),"$\\pm$",sprintf("%07.6f",sd(bound[[i]][2:51]/bound[[1]][2:51])))
   
 }
-
+res
 
 
 
