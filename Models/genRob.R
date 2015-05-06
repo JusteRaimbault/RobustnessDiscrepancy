@@ -2,6 +2,8 @@
 # Generalized Rob Ratio computation on Geo data
 # (Paris districts)
 
+library(DiceDesign)
+
 # -> first load arrondissements, buildings and roads from geodata script
 
 
@@ -43,7 +45,7 @@ carToWork <- function(arrs){
   
   res=list()
   res[[1]]=dat
-  res[[2]]=indic
+  res[[2]]=1-indic
   
   return(res)
 }
@@ -68,7 +70,7 @@ vehicleFlow <- function(arrs){
   
   res=list()
   res[[1]]=dat
-  res[[2]]=indic
+  res[[2]]=1-indic
   
   return(res)
   
