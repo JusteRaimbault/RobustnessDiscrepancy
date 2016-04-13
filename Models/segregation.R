@@ -42,15 +42,16 @@ registerDoParallel(cl)
 
 startTime = proc.time()[3]
 
-nrep = 20
+nrep = 50
 
 #for(k in 1:nrep){
 res <- foreach(i=1:nrep) %dopar% {
+  setwd(paste0(Sys.getenv('CS_HOME'),'/RobustnessDiscrepancy/Models'))
   source('functions.R')
   d = loadData('grandParis')
-
+  jdata=d$jdata;spdata=d$spdata;spweights=d$spweights
   robs=c();missing=c()
-  for(m in seq(from=0,to=0.5,by=0.05)){
+  for(m in seq(from=0.0,to=0.5,by=0.05)){
     sample = sample.int(nrow(jdata),size=floor(nrow(jdata)*(1-m)))
     mo = moran(jdata,spdata,spweights,"medincome",sample)
     diss = dissimilarity(jdata,spdata,spweights,"medincome",sample)
@@ -59,11 +60,11 @@ res <- foreach(i=1:nrep) %dopar% {
     d2 = discrepancyCriteria(entr$data,type=c('L2'))$DisL2
     robs = append(robs,d1*mo$globalmoran+d1*diss$dissimilarity+d2*entr$entropy)
     missing=append(missing,m)
-    
   }
-  
   return(data.frame(robs,missing))
 }
+
+stopCluster(cl)
 
 show(proc.time()[3]-startTime)
 
