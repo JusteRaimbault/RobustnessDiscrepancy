@@ -37,6 +37,11 @@ source('functions.R')
 #    -> sample datasets
 
 library(doParallel)
+
+departements = c("75","92","93","94","69")
+
+for(dep in departement){
+
 cl <- makeCluster(10)
 registerDoParallel(cl)
 
@@ -48,7 +53,8 @@ nrep = 50
 res <- foreach(i=1:nrep) %dopar% {
   setwd(paste0(Sys.getenv('CS_HOME'),'/RobustnessDiscrepancy/Models'))
   source('functions.R')
-  d = loadData('grandParis')
+  #d = loadData('grandParis')
+  d=loadData(paste0('CONTOURS-IRIS',dep))
   jdata=d$jdata;spdata=d$spdata;spweights=d$spweights
   robs=c();missing=c()
   for(m in seq(from=0.0,to=0.5,by=0.05)){
@@ -68,6 +74,9 @@ stopCluster(cl)
 
 show(proc.time()[3]-startTime)
 
-save(res,file='res/missing.RData')
+save(res,file=paste0('res/missing_',dep,'.RData'))
+
+}
+
 
 
