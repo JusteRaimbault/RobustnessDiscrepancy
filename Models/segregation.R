@@ -40,7 +40,7 @@ library(doParallel)
 
 departements = c("75","92","93","94","69")
 
-for(dep in departement){
+for(dep in departements){
 
 cl <- makeCluster(10)
 registerDoParallel(cl)
@@ -57,7 +57,7 @@ res <- foreach(i=1:nrep) %dopar% {
   d=loadData(paste0('CONTOURS-IRIS',dep))
   jdata=d$jdata;spdata=d$spdata;spweights=d$spweights
   robs=c();missing=c()
-  for(m in seq(from=0.0,to=0.5,by=0.05)){
+  for(m in seq(from=0.0,to=0.5,by=0.02)){
     sample = sample.int(nrow(jdata),size=floor(nrow(jdata)*(1-m)))
     mo = moran(jdata,spdata,spweights,"medincome",sample)
     diss = dissimilarity(jdata,spdata,spweights,"medincome",sample)
@@ -74,7 +74,7 @@ stopCluster(cl)
 
 show(proc.time()[3]-startTime)
 
-save(res,file=paste0('res/missing_',dep,'.RData'))
+save(res,file=paste0('res/missing_ext_',dep,'.RData'))
 
 }
 
