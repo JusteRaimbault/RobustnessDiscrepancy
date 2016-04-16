@@ -103,20 +103,22 @@ robustness <- function(indicators,data){
 }
 
 
-carto <- function(spdf,df,var){
+carto <- function(spdf,df,var,title){
   cols <- carto.pal(pal1 = "green.pal",n1 = 5, pal2 = "red.pal",n2 = 5)
   
-  plot(spdata, border = NA, col = NA, bg = "#E3DEBF")
-  choroLayer(spdf = spdata,
+  #plot(spdata, border = NA, col = NA, bg = "#E3DEBF")
+  choroLayer(spdf = spdf,
              df = df,
              var=var,
              col=cols,
              nclass=10,
              #breaks = quantile(data$NBMEN11,probs=seq(from=0,to=1,by=0.2),na.rm=TRUE),
-             add=TRUE,lwd = 0.1
+             add=FALSE,lwd = 0.1,
+             legend.pos = "topleft",
+             legend.title.txt = title,
+             legend.values.rnd = 2
   )
-  plot(spdata,border = "grey20", lwd=0.1, add=TRUE)
-  
+  plot(spdf,border = "grey20", lwd=0.1, add=TRUE)
 }
 
 
