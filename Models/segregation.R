@@ -56,7 +56,7 @@ res <- foreach(i=1:nrep) %dopar% {
   #d = loadData('grandParis')
   d=loadData(paste0('CONTOURS-IRIS',dep))
   jdata=d$jdata;spdata=d$spdata;spweights=d$spweights
-  robs=c();missing=c()
+  robs=c();missing=c();morans=c();entropies=c();dissim=c();discr1=c();discr2=c()
   for(m in seq(from=0.0,to=0.5,by=0.02)){
     sample = sample.int(nrow(jdata),size=floor(nrow(jdata)*(1-m)))
     mo = moran(jdata,spdata,spweights,"medincome",sample)
@@ -66,15 +66,17 @@ res <- foreach(i=1:nrep) %dopar% {
     d2 = discrepancyCriteria(entr$data,type=c('L2'))$DisL2
     robs = append(robs,d1*mo$globalmoran+d1*diss$dissimilarity+d2*entr$entropy)
     missing=append(missing,m)
+    morans=append(morans,mo);entropies=append(entropies,entr);dissim=append(dissim,diss)
+    discr1=append(discr1,d1):discr2=append(discr2,d2)
   }
-  return(data.frame(robs,missing))
+  return(data.frame(robs,missing,morans,entropies,dissim,discr1,discr2))
 }
 
 stopCluster(cl)
 
 show(proc.time()[3]-startTime)
 
-save(res,file=paste0('res/missing_ext_',dep,'.RData'))
+save(res,file=paste0('res/missing_ext_withIndics_',dep,'.RData'))
 
 }
 
