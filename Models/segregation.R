@@ -42,12 +42,12 @@ departements = c("75","92","93","94","69")
 
 for(dep in departements){
 
-cl <- makeCluster(10)
+cl <- makeCluster(2)
 registerDoParallel(cl)
 
 startTime = proc.time()[3]
 
-nrep = 50
+nrep = 2
 
 #for(k in 1:nrep){
 res <- foreach(i=1:nrep) %dopar% {
@@ -67,7 +67,7 @@ res <- foreach(i=1:nrep) %dopar% {
     robs = append(robs,d1*mo$globalmoran+d1*diss$dissimilarity+d2*entr$entropy)
     missing=append(missing,m)
     morans=append(morans,mo);entropies=append(entropies,entr);dissim=append(dissim,diss)
-    discr1=append(discr1,d1):discr2=append(discr2,d2)
+    discr1=append(discr1,d1);discr2=append(discr2,d2)
   }
   return(data.frame(robs,missing,morans,entropies,dissim,discr1,discr2))
 }

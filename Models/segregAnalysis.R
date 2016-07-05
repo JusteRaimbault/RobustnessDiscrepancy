@@ -7,6 +7,16 @@ source('functions.R')
 
 library(ggplot2)
 
+# compte grd Paris with missing = 0
+d = loadData('grandParis')
+jdata=d$jdata;spdata=d$spdata;spweights=d$spweights
+sample = 1:nrow(jdata)
+mo = moran(jdata,spdata,spweights,"medincome",sample)
+diss = dissimilarity(jdata,spdata,spweights,"medincome",sample)
+entr = entropy(jdata,"medincome",sample)
+d1 = discrepancyCriteria(mo$data,type=c('L2'))$DisL2
+d2 = discrepancyCriteria(entr$data,type=c('L2'))$DisL2
+
 allres=list()
 for(dep in c("75","92","93","94")){
   load(paste0('res/missing_ext_',dep,'.RData'))
@@ -17,6 +27,17 @@ grdParis=res
  
 deps = c()
 for(n in names(allres)){deps=append(deps,rep(n,length(allres[[1]])*dim(allres[[1]][[1]])[1]))}
+
+# get max/min of indics
+maxentr = max(c(entr$entropy,sapply(allres,function(res){return(max(res[,4]))})))
+minentr = min(c(entr$entropy,sapply(allres,function(res){return(min(res[,4]))})))
+maxmor = max(c(mo$globalMoran,sapply(allres,function(res){return(max(res[,3]))})))
+minmor = min(c(mo$globalMoran,sapply(allres,function(res){return(min(res[,3]))})))
+maxdiss = max(c(diss$dissimilarity,sapply(allres,function(res){return(max(res[,5]))})))
+mindiss = min(c(diss$dissimilarity,sapply(allres,function(res){return(max(res[,5]))})))
+
+getRob<-function(d){d[6]*(d[3]-minmor)/(maxmor-minmor)+d[6]*(d[5]-mindiss)/(maxdiss-mindiss)+d[7]*(d[4]-minentr)/(maxentr-minentr)}
+
 
 dr = as.tbl(data.frame(
   rob=unlist(lapply(allres,function(res){unlist(lapply(res,function(d){d[,1]/grdParis[[1]][1,1]}))})),

@@ -220,9 +220,9 @@ The scene is now set up to be able to estimate the robustness of the evaluation 
 
 Let $\mathbf{X}_{i,c}=(\vec{X}_{i,c,l})_{1\leq l\leq n_{i,c}}$ and
 
-\[D_{i,c}=Discp_{\tilde{\mathcal{X}}_{c},\infty}(\mathbf{X}_{i,c})\]
+\[D_{i,c}=Discp_{\tilde{\mathcal{X}}_{c},L^2}(\mathbf{X}_{i,c})\]
 
-the discrepancy of data points cloud~\cite{niederreiter1972discrepancy}.
+the discrepancy of data points cloud~\cite{niederreiter1972discrepancy}. It is defined as the $L2$-norm of local discrepancy which is for normalized data points $(x_i)$
 
 With $h\in H_{c}$, we have the upper bound on the integral approximation error
 
@@ -416,7 +416,7 @@ Numerous measures of segregation with various meanings and at different scales a
 %\vspace{-1.5cm}
 \hspace{-3cm}\includegraphics[width=1.2\textwidth]{figures/grandParis_income_moran}
 \vspace{-2.5cm}
-\caption{\textbf{Maps of Metropolitan Segregation.} Maps show yearly median income on basic statistical units (IRIS) for the three departments constituting mainly the Great Paris metropolitan area, and the corresponding local Moran spatial autocorrelation index, defined for unit $i$ as $\rho_i = N/\sum{j}w_{ij} \cdot \frac{\sum_j w_ij (X_j - \bar{X})(X_i - \bar{X})}{\sum_i (X_i - \bar{X})^2}$. The most segregated areas coincide with the richest and the poorest, suggesting an increase of segregation in extreme situations.}
+\caption{\textbf{Maps of Metropolitan Segregation.} Maps show yearly median income on basic statistical units (IRIS) for the three departments constituting mainly the Great Paris metropolitan area, and the corresponding local Moran spatial autocorrelation index, defined for unit $i$ as $\rho_i = N/\sum_{j}w_{ij} \cdot \frac{\sum_{j} w_{ij} (X_j - \bar{X})(X_i - \bar{X})}{\sum_i (X_i - \bar{X})^2}$. The most segregated areas coincide with the richest and the poorest, suggesting an increase of segregation in extreme situations.}
 \end{figure}
 %%%%%%%%%%%%%%%%
 
