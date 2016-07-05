@@ -42,12 +42,20 @@ departements = c("75","92","93","94","69")
 
 for(dep in departements){
 
+<<<<<<< HEAD
 cl <- makeCluster(2)
+=======
+cl <- makeCluster(15)
+>>>>>>> 726dc5363cd999ec3d570d08c790c5b1805b43a6
 registerDoParallel(cl)
 
 startTime = proc.time()[3]
 
+<<<<<<< HEAD
 nrep = 2
+=======
+nrep = 75
+>>>>>>> 726dc5363cd999ec3d570d08c790c5b1805b43a6
 
 #for(k in 1:nrep){
 res <- foreach(i=1:nrep) %dopar% {
@@ -66,7 +74,11 @@ res <- foreach(i=1:nrep) %dopar% {
     d2 = discrepancyCriteria(entr$data,type=c('L2'))$DisL2
     robs = append(robs,d1*mo$globalmoran+d1*diss$dissimilarity+d2*entr$entropy)
     missing=append(missing,m)
+<<<<<<< HEAD
     morans=append(morans,mo);entropies=append(entropies,entr);dissim=append(dissim,diss)
+=======
+    morans=append(morans,mo$globalmoran);entropies=append(entropies,entr$entropy);dissim=append(dissim,diss$dissimilarity)
+>>>>>>> 726dc5363cd999ec3d570d08c790c5b1805b43a6
     discr1=append(discr1,d1);discr2=append(discr2,d2)
   }
   return(data.frame(robs,missing,morans,entropies,dissim,discr1,discr2))
