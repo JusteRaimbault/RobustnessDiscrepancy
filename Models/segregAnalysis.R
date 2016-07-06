@@ -19,7 +19,7 @@ d2 = discrepancyCriteria(entr$data,type=c('L2'))$DisL2
 
 allres=list()
 for(dep in c("75","92","93","94")){
-  load(paste0('res/missing_ext_',dep,'.RData'))
+  load(paste0('res/missing_ext_withIndics_',dep,'.RData'))
   allres[[dep]] = res
 }
 load('res/missing.RData')
@@ -29,18 +29,21 @@ deps = c()
 for(n in names(allres)){deps=append(deps,rep(n,length(allres[[1]])*dim(allres[[1]][[1]])[1]))}
 
 # get max/min of indics
-maxentr = max(c(entr$entropy,sapply(allres,function(res){return(max(res[,4]))})))
-minentr = min(c(entr$entropy,sapply(allres,function(res){return(min(res[,4]))})))
-maxmor = max(c(mo$globalMoran,sapply(allres,function(res){return(max(res[,3]))})))
-minmor = min(c(mo$globalMoran,sapply(allres,function(res){return(min(res[,3]))})))
-maxdiss = max(c(diss$dissimilarity,sapply(allres,function(res){return(max(res[,5]))})))
-mindiss = min(c(diss$dissimilarity,sapply(allres,function(res){return(max(res[,5]))})))
+maxentr = max(c(entr$entropy,sapply(allres,function(l){sapply(l,function(res){return(max(res$entropies))})})))
+minentr = min(c(entr$entropy,sapply(allres,function(l){sapply(l,function(res){return(min(res$entropies))})})))
+maxmor = max(c(mo$globalmoran,sapply(allres,function(l){sapply(l,function(res){return(max(res$morans))})})))
+minmor = min(c(mo$globalmoran,sapply(allres,function(l){sapply(l,function(res){return(min(res$morans))})})))
+maxdiss = max(c(diss$dissimilarity,sapply(allres,function(l){sapply(l,function(res){return(max(res$dissim))})})))
+mindiss = min(c(diss$dissimilarity,sapply(allres,function(l){sapply(l,function(res){return(min(res$dissim))})})))
 
 getRob<-function(d){d[6]*(d[3]-minmor)/(maxmor-minmor)+d[6]*(d[5]-mindiss)/(maxdiss-mindiss)+d[7]*(d[4]-minentr)/(maxentr-minentr)}
 
+# grd Paris with all data as reference
+reference_rob = getRob(c(0,0,mo$globalmoran,entr$entropy,diss$dissimilarity,d1,d2))
 
 dr = as.tbl(data.frame(
-  rob=unlist(lapply(allres,function(res){unlist(lapply(res,function(d){d[,1]/grdParis[[1]][1,1]}))})),
+  #rob=unlist(lapply(allres,function(res){unlist(lapply(res,function(d){d[,1]/grdParis[[1]][1,1]}))})),
+  rob=unlist(lapply(allres,function(res){unlist(lapply(res,function(d){getRob(d)/reference_rob}))})),
   missing=unlist(lapply(allres,function(res){unlist(lapply(res,function(d){d[,2]}))})),
   departement=deps
 ))
