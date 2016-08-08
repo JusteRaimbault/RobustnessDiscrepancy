@@ -16,7 +16,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\documentclass[runningheads,a4paper]{llncs2e/llncs}
+\documentclass[runningheads,a4paper]{llncs}
 
 \usepackage{amssymb,amsmath,bbm}
 \setcounter{tocdepth}{3}
@@ -264,16 +264,6 @@ Limits of \emph{arrondissements}, used to overlay and extract features when work
 %An example of visualization of used data is shown in Fig.~\ref{fig:data_ex}.
 
 
-%%%%%%%%%%%%%%%%
-%\begin{figure}
-%\centering
-%\includegraphics[width=\textwidth]{figures/ex_data}
-%\caption{Example of a visualization of used data for center area of Paris. We use centroids of buildings which polygons are filled in red, and segments of street network drawn in green. Dataset overall consists of around 200000 building features and 100000 road segments.}
-%\label{fig:data_ex}
-%\end{figure}
-%%%%%%%%%%%%%%%%
-
-
 
 %%%%%%%%%%%%%%%%
 \paragraph{Virtual Cases}
@@ -385,7 +375,7 @@ Numerous measures of segregation with various meanings and at different scales a
 \begin{figure}[h!]
 \centering
 %\vspace{-1.5cm}
-\hspace{-3cm}\includegraphics[width=1.2\textwidth]{figures/grandParis_income_moran}\hspace{-2cm}
+\hspace{-3cm}\includegraphics[width=1.2\textwidth]{grandParis_income_moran.pdf}\hspace{-2cm}
 \vspace{-2.5cm}
 \caption{\textbf{Maps of Metropolitan Segregation.} Maps show yearly median income on basic statistical units (IRIS) for the three departments constituting mainly the Great Paris metropolitan area, and the corresponding local Moran spatial autocorrelation index, defined for unit $i$ as $\rho_i = N/\sum_{j}w_{ij} \cdot \frac{\sum_{j} w_{ij} (X_j - \bar{X})(X_i - \bar{X})}{\sum_i (X_i - \bar{X})^2}$. The most segregated areas coincide with the richest and the poorest, suggesting an increase of segregation in extreme situations.}
 \end{figure}
@@ -402,8 +392,8 @@ We apply our method with these indicators on the Greater Paris area, constituted
 \begin{figure}
 \centering
 %\vspace{-1cm}
-\hspace{-2cm}\includegraphics[width=0.55\textwidth]{figures/alldeps_rob_renormindics}
-\includegraphics[width=0.55\textwidth]{figures/alldeps_robsd_renormindics}\hspace{-2cm}
+\hspace{-2cm}\includegraphics[width=0.55\textwidth]{alldeps_rob_renormindics.pdf}
+\includegraphics[width=0.55\textwidth]{alldeps_robsd_renormindics.pdf}\hspace{-2cm}
 \caption{\textbf{Sensitivity of robustness to missing data.} \textit{Left.} For each department, Monte Carlo simulations (N=75 repetitions) are used to determine the impact of missing data on robustness of segregation evaluation. Robustness ratios are all computed relatively to full metropolitan area with all available data. Quasi-linear behavior translates an approximative linear decrease of discrepancy as a function of data size. The similar trajectory of poorest departments (93,94) suggest the correction to linear behavior being driven be segregation patterns. \textit{Right.} Corresponding standard deviations of robustness ratios. Different regimes (in particular 93 against others) unveil phase transitions at different levels of missing data, meaning that the evaluation in 94 is from this point of view more sensitive to missing data.}
 \end{figure}
 %%%%%%%%%%%%%%%%
@@ -466,7 +456,7 @@ The author would like to thank Julien Keutchayan (Ecole Polytechnique de Montr{\
 %%%%%%%%%%%%%%%%
 
 \bibliographystyle{unsrt}
-\bibliography{biblio/biblio}
+\bibliography{biblio}
 
 
 
