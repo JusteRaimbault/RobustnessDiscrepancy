@@ -1,0 +1,264 @@
+\documentclass[english,11pt]{beamer}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Proba}{\mathbb{P}}
+
+\newcommand{\Covb}[2]{\ensuremath{\Cov\!\left[#1,#2\right]}}
+\newcommand{\Eb}[1]{\ensuremath{\E\!\left[#1\right]}}
+\newcommand{\Pb}[1]{\ensuremath{\Proba\!\left[#1\right]}}
+\newcommand{\Varb}[1]{\ensuremath{\Var\!\left[#1\right]}}
+
+% norm
+\newcommand{\norm}[1]{\| #1 \|}
+
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+
+
+
+
+\usepackage{mathptmx,amsmath,amssymb,graphicx,bibentry,bbm,babel,ragged2e}
+
+\makeatletter
+
+\newcommand{\noun}[1]{\textsc{#1}}
+\newcommand{\jitem}[1]{\item \begin{justify} #1 \end{justify} \vfill{}}
+\newcommand{\sframe}[2]{\frame{\frametitle{#1} #2}}
+
+\newenvironment{centercolumns}{\begin{columns}[c]}{\end{columns}}
+%\newenvironment{jitem}{\begin{justify}\begin{itemize}}{\end{itemize}\end{justify}}
+
+\usetheme{Warsaw}
+\setbeamertemplate{footline}[text line]{}
+\setbeamercolor{structure}{fg=purple!50!blue, bg=purple!50!blue}
+
+\setbeamersize{text margin left=15pt,text margin right=15pt}
+
+\setbeamercovered{transparent}
+
+
+\@ifundefined{showcaptionsetup}{}{%
+ \PassOptionsToPackage{caption=false}{subfig}}
+\usepackage{subfig}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+
+\makeatother
+
+\begin{document}
+
+
+\title{A Discrepancy-based Framework to Compare Robustness between Multi-Attribute Evaluations}
+
+\author{J.~Raimbault$^{1,2}$\\
+\texttt{juste.raimbault@parisgeo.cnrs.fr}
+}
+
+
+\institute{$^{1}$UMR CNRS 8504 G{\'e}ographie-cit{\'e}s\\
+$^{2}$UMR-T IFSTTAR 9403 LVMT\\
+}
+
+
+\date{CSDM 2016 - Paris\\\smallskip
+14th December 2016
+}
+
+\frame{\maketitle}
+
+
+
+%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%
+
+
+\sframe{Complex systems}{
+
+% introduction with pictures/anecdote
+
+}
+
+
+
+\sframe{Multi-attribute Evaluation in Complex Socio-technical Systems}{
+
+\justify
+
+}
+
+
+\sframe{Robustness of Evaluations}{
+
+\justify
+
+
+}
+
+
+\sframe{Towards a Framework}{
+
+\justify
+
+\textbf{Research Objective : } \textit{}
+
+% put rationales here
+
+\bigskip
+
+$\rightarrow$ 
+\medskip
+
+$\rightarrow$ 
+
+}
+
+
+%%%%%%%%%%%%%%%%%
+\section{Framework Description}
+%%%%%%%%%%%%%%%%%
+
+
+
+\sframe{Intuitive Description}{
+
+
+}
+
+
+
+\sframe{Formal Description (I)}{
+
+
+}
+
+
+
+
+\sframe{Formal Description (II)}{
+
+
+}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%
+\section{Results}
+%%%%%%%%%%%%%%%%%
+
+
+
+
+\sframe{Implementation on Synthetic Data}{
+
+% summary, data description, main result (summary of table)
+
+}
+
+\sframe{Metropolitan Segregation}{
+
+% indicators, data
+
+
+}
+
+\sframe{Metropolitan Segregation}{
+
+% segreg maps
+
+}
+
+
+\sframe{Metropolitan Segregation}{
+
+% missing data
+
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%
+\section{Discussion}
+%%%%%%%%%%%%%%%%%
+
+
+\sframe{Applicability}{
+
+\justify
+
+
+}
+
+
+
+
+\sframe{Possible Developments}{
+
+\justify
+
+
+}
+
+
+
+\sframe{Conclusion}{
+
+$\rightarrow$ 
+
+\medskip
+
+
+\bigskip
+\bigskip
+\bigskip
+
+
+\footnotesize{ - All code available at \texttt{https://github.com/JusteRaimbault/RobustnessDiscrepancy}
+
+\medskip
+
+ - Paper preprint available at \texttt{http://arxiv.org/abs/}
+}
+
+}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\bibliographystyle{apalike}
+\bibliography{/Users/Juste/Documents/ComplexSystems/CityNetwork/Biblio/Bibtex/CityNetwork,biblio}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
